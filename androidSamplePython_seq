@@ -14,18 +14,15 @@ pipeline{
 
         stage('安卓编译打包') {
             steps {
-                sh '''
                     . ~/.bash_profile
                     cd AndroidSampleApp
                     sh gradlew clean assembleDebug
-                '''
             }
         }
 
 
         stage('安卓部署') {
             steps {
-                sh '''
                     . ~/.bash_profile
                     cd AndroidSampleApp
                     apk=app/build/outputs/apk/debug/app-debug.apk
@@ -40,13 +37,11 @@ pipeline{
 
                     #安装安卓app
                     adb install $apk
-                '''
             }
         }
 
         stage('自动测试程序源码同步') {
             steps {
-                sh 'mkdir -p iAppBVT_Python'
                 dir("iAppBVT_Python"){
                     git branch:'master', url:'git@github.com:13651440608/iAppBVT_Python.git'
                 }
@@ -55,7 +50,6 @@ pipeline{
 
         stage('运行自动化测试') {
             steps {
-                sh '''
                     . ~/.bash_profile
 
                     cd iAppBVT_Python
@@ -65,7 +59,6 @@ pipeline{
 
                     #运行自动化测试
                     pytest -sv test/bvt_test.py --tc-file ~/iAppBVT_Python.json --tc-format json
-                '''
             }
         }
     }
