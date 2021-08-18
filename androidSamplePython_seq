@@ -6,7 +6,6 @@ pipeline{
     stages{
         stage('安卓程序源码同步') {
             steps {
-                mkdir -p AndroidSampleApp
                 dir("AndroidSampleApp"){
                     git branch:'master', url:'git@github.com:13651440608/AndroidSampleApp.git'
                 }
