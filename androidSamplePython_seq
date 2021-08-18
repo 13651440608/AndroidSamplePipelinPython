@@ -11,5 +11,14 @@ pipeline{
                 }
             }
         }
+        
+     stage('安卓编译打包') {
+            steps {
+                    cd AndroidSampleApp
+                    sh gradlew clean assembleDebug
+            }
+        }
+   
+        
     }
 }
