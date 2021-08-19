@@ -15,7 +15,7 @@ pipeline{
          stage('安卓编译打包') {
             steps {
                     cd androidSamplePipline_1/AndroidSampleApp 
-                    sh gradlew clean assembleDebug
+                    /gradlew clean assembleDebug
              }
          }
    
